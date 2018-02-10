@@ -1,0 +1,41 @@
+body {
+   background-color: steelblue;
+   color: steelblue;
+}
+#container {
+    text-align: center;
+    margin: 5%;
+    background-color: white;
+}
+
+#Heading {
+    height: 100px
+    
+}
+
+.previous {
+    display:inline-block;
+}
+
+.startOver {
+    display:inline-block;
+}
+
+.next {
+    display:inline-block;
+}
+
+.timeRemaining {
+    margin-top: 10px;
+}
+
+.buttons {
+    margin-bottom: 2%;
+}
+#start {
+    padding: 5%;
+}
+
+#questionAsked {
+    padding-bottom: 2%;
+}
