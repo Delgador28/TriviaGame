@@ -1,41 +1,16 @@
+/* INDEX HTML */
+
 body {
-   background-color: steelblue;
-   color: steelblue;
+    font-family: 'Buda', cursive;
 }
-#container {
+#wrapper {
+text-align: center;
+margin-top: 5%;
+}
+
+#subwrapper {
     text-align: center;
-    margin: 5%;
-    background-color: white;
+    margin: 10%;
+    padding: 10%;
 }
-
-#Heading {
-    height: 100px
-    
-}
-
-.previous {
-    display:inline-block;
-}
-
-.startOver {
-    display:inline-block;
-}
-
-.next {
-    display:inline-block;
-}
-
-.timeRemaining {
-    margin-top: 10px;
-}
-
-.buttons {
-    margin-bottom: 2%;
-}
-#start {
-    padding: 5%;
-}
-
-#questionAsked {
-    padding-bottom: 2%;
-}
+/* ************* */

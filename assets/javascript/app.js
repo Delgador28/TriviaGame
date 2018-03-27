@@ -1,130 +1,134 @@
-//Here I am identifying my questions object, as a global variable so i can just call them up when I need to, without creating a new variable under every funtion(?)
-$(document).ready(function() {
+$("#start").on("click", function () {
+  $("#start").remove();
+  game.loadQuestion();
+});
 
-var qAndA = [
-    { 
-      question:"According to Greek Mythology, who was the god of wine?",
-        choices:["Hypnos", "Tyche", "Dionysos", "Hades"],
-          answer: 2,
-     },
+$(document).on("click", ".answer-button", function(e){
+  game.clicked(e);
 
-    {
-      question:"What is the world's largest ocean?",
-        choices:["Pacific", "Atlantic" ,"Indian", "Arctic" ],
-          answer: 0,
-    },
+});
 
-    {
-      question:"In what month is the Earth closest to the sun?",
-        choices:["December", "January", "February", "March"],
-          answer: 1,
-    },
-    
-    {
-      question:"In what year did the Titanic sink?",
-        choices:[1908, 1912, 1916, 1920],
-          answer: 1,
-    },
+$(document).on("click", '#reset', function(){
+  game.reset();
+});
 
-    {
-      question:"Who is the only US president to serve more than two terms?",
-        choices:["Bill CLinton", "Richard Nixon", "Franklin Delano Roosevelt", "Guy Fieri"],
-          answer: 2,
-    },
-  ];
- // Starting everything off with the function to load the page
- 
-//global variables along with the array if questions above
- var trivia = {
-  correctAnswers = 0,
-  incorrectAnswers = 0,
-  unansweredAnswers = 0,
-  questionCounter: 0,
-  clock: "",
-  timeCounter: 10,
-  }
-//First OnCLicks starting + ending games
-  $(document).on("click", "#start", function(event){
-    startGame();
-  });
-  
-  $(document).on("click", "#startOver", function(event){
-    startOver();
-  });
+var questions = [
+  {
+    question: "According to Greek Mythology, who was the god of wine?",
+    answers: ["Hypnos", "Tyche", "Dionysos", "Hades"],
+    correctAnswer: "Dionysos",
+  },
 
-  //Now giving value to these functions
-function startGame() {
-  setTimer =  $(".timeRemaining").text("00:00");
-  $("#questionAsked").text("Question One: " + qAndA[0].question); // START GAME FUNCTION IS HERE !!!!!!!
+  {
+    question: "What is the world's largest ocean?",
+    answers: ["Pacific", "Atlantic", "Indian", "Arctic"],
+    correctAnswer: "Pacific",
+  },
 
- }
+  {
+    question: "In what month is the Earth closest to the sun?",
+    answers: ["December", "January", "February", "March"],
+    correctAnswer: "January",
+  },
 
- // display one question // create forloop for questions
+  {
+    question: "In what year did the Titanic sink?",
+    answers: [1908, 1912, 1916, 1920],
+    correctAnswer: 1912,
+  },
 
+  {
+    question: "Who is the only US president to serve more than two terms?",
+    answers: ["Bill CLinton", "Richard Nixon", "Franklin Delano Roosevelt", "Guy Fieri"],
+    correctAnswer: "Franklin Delano Roosevelt",
+  },
+]
 
-
-// timer --------- 
-
-function timer(){
-  trivia.qAndA = setInterval(tenSeconds, 1000);
-
-  function tenSeconds(){
-    if  (trivia.timeCounter === 0){
-        timeOutLoss();
-        clearInterval(trivia.clock);
+var game = {
+  questions: questions,
+  currentQuestion: 0,
+  counter: 30,
+  correct: 0,
+  incorrect: 0,
+  unanswered: 0,
+  countdown: function () {
+    game.counter--;
+    $("#counter").html(game.counter);
+    if (game.counter<=0){
+      console.log("Time is up :(")
+      game.timeUp();
     }
-    if(trivia.timeCounter > 0) {
-      trivia.timeCounter --;
+  },
+  loadQuestion: function () {
+    timer = setInterval(game.countdown, 1000 );
+
+    $("#subwrapper").html("<h2>TIME REMAINING: <span id='counter'>30</span> Seconds </h2>");
+    $("#subwrapper").append("<h2>" + questions[game.currentQuestion].question + "</h2>");
+    for (var i = 0; i < questions[game.currentQuestion].answers.length; i++) {
+      $("#subwrapper").append("<button class='answer-button'  id='button-"+ i + "' data-name= '"+ questions[game.currentQuestion].answers[i] + "'>"+ questions[game.currentQuestion].answers[i] + "</button>")
     }
-    $(".timer").html(trivia.timeCounter);
+  },
+  nextQuestion: function () {
+    game.counter = 30;
+    $("#counter").html(game.counter);
+    game.currentQuestion++;
+    game.loadQuestion();
+  },
+  timeUp: function () {
+    clearInterval(timer);
+    game.unanswered++;
+    $("#subwrapper").html("<h2> OUT OF TIME</h2>");
+    $("#subwrapper").append("<h3> The correct answer was:" + questions[game.currentQuestion].correctAnswer + "</h3>");
+    if (game.currentQuestion==questions.length-1){
+      setTimeout(game.results,3*1000);
+    } else {
+      setTimeout(game.nextQuestion,3*1000);
+    }
+  },
+  results: function () {
+    clearInterval(timer);
+    $("#subwrapper").html("ALL DONE");
+    $("#subwrapper").append("<h3>Correct: " + game.correct + "</h3>");
+    $("#subwrapper").append("<h3>Incorrect: " + game.incorrect + "</h3>");
+    $("#subwrapper").append("<h3>Unanswered: " + game.unanswered + "</h3>");
+    $("#subwrapper").append("<button id='reset'>RESET</button>");
+
+  },
+  clicked: function (e) {
+    clearInterval(timer);
+    if($(e.target).data("name")==questions[game.currentQuestion].correctAnswer){
+      game.answerCorrectly();
+    } else {
+      game.answerIncorrectly();
+    }
+  },
+  answerCorrectly: function () {
+    clearInterval(timer);
+    game.correct++;
+    $("#subwrapper").html("<h2> YOU GOT IT </h2>");
+    if (game.currentQuestion==questions.length-1){
+      setTimeout(game.results,3*1000);
+    } else {
+      setTimeout(game.nextQuestion,3*1000);
+    }
+  },
+  answerIncorrectly: function () {
+    clearInterval(timer);
+    game.incorrect++;
+    $("#subwrapper").html("<h2> YOU GOT IT WRONG </h2>");
+    $("#subwrapper").append("<h3> The correct answer was:" + questions[game.currentQuestion].correctAnswer + "</h3>");
+    if (game.currentQuestion==questions.length-1){
+      setTimeout(game.results,3*1000);
+    } else {
+      setTimeout(game.nextQuestion,3*1000);
+    }
+  },
+  reset: function () {
+    game.currentQuestion = 0;
+    game.counter = 0;
+    game.correct = 0;
+    game.incorrect = 0;
+    game.unanswered = 0;
+    game.loadQuestion();
   }
-};
-
-
-
-
-
-
-//-----------------
-  
-  // for (var i = 0; i < qAndA.length;i++)
-    
-
-// var intervalId;
-// var clockRunning = false;
-// var timer = {
-//   time: 0,
-
-//   reset: function (){
-//     timer.time = 0;
-//          $(".timeRemaining").text("00:00");
-// },
-
-//   start: function() {
-//     if (!clockRunning) {
-//       intervalId = setInterval(time.count, 30000);
-//       clockRunning = true;
-//     }
-//   },
-  // function startTrivia
-
-//   $("#start").on("click", function() {
-//       $(".hideThese").hide();
-
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-})
+}
