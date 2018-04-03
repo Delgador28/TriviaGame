@@ -1,64 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Trivia Game</title>
-  <!-- Add links here - Do jquery on the bottom -->
+  <title>Multiple Choice Trivia Game</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Buda:300" rel="stylesheet">
 </head>
 
 <body>
 
-  <!-- Container that holds the text for title/questions/styles -->
+  <div id="wrapper">
+    <h1>Trivia Game</h1>
 
-<div id="container">
-
-  <div id="Heading">
-    <h1> Trivia Game !!</h1>
+    <div id="subwrapper">
+      <div class="card">
+        <h5 class="card-header">TRIVIA GAME WHOA! </h5>
+        <div class="card-body">
+          <p class="card-text">Select "start" to begin your Triva Game!</p>
+          <a id="start" class="btn btn-dark">START</a>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div id="start">
-      <button id="start" >Start Game</button>
-    </div>
-  
+  <script type="text/javascript" src="assets/javascript/app.js"></script>
 
-  <div class="timeRemaining">
-
-      <p id="timeRemaining">Time Remaining: 10 seconds</p>
-    
-    </div>
-
-    <div class="questionAsked">
-
-      <h2 id="questionAsked"></h2>
-    
-    </div>
-
-    <div class="hideThese">
-      
-      <div id="answerChoices">
-
-        <div class="buttons" id="answerChoices1"> </a></div>
-        <div class="buttons" id="answerChoices2"> </a></div>
-        <div class="buttons" id="answerChoices3"> </a></div>
-        <div class="buttons" id="answerChoices4"> </a></div>
-
-
-      </div>
-
-        <div id="mainButtons">
-      
-          <div class="buttons" id="correctAnswers"><a href='#'>Correct Answers: </a></div>
-          <div class="buttons" id="incorrectAnswers"><a href='#'>Incorrect Answers: </a></div>
-          <div class="buttons" id="unAnswered"><a href='#'>Unanswered: </a></div>
-          <div class="buttons" id="startOver"><a href='#'>Start Over: </a></div>
-         
-      </div>  
-</div>
-</div>
-
-<!-- <script> jQuery link</script> -->
-<script src="https://code.jquery.com/jquery.js"></script>
-<script type="text/javascript" src="assets/javascript/app.js"></script>
 </body>
+
 </html>
