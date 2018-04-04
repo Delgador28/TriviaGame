@@ -9,7 +9,7 @@ User will begin on a question with a timer of 30 seconds, after being answered a
 
 ![Correct Example](assets/images/trivia1Correct.gif)
 ![inCorrect Example](assets/images/trivia2Wrong.gif)
-![End Example](assets/images/trivia3End.gif)
+![End Example](assets/images/triviaEnd3.gif)
 
 ### Want a Sneak Peak of the code? Well here you have it! 
 
