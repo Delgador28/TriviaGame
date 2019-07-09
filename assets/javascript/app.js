@@ -14,11 +14,11 @@ $(document).on("click", '#reset', function () {
 });
 
 var questions = [
-  {
-    question: "According to Greek Mythology, who was the god of wine?",
-    answers: ["Hypnos", "Tyche", "Dionysos", "Hades"],
-    correctAnswer: "Dionysos",
-  },
+  // {
+  //   question: "According to Greek Mythology, who was the god of wine?",
+  //   answers: ["Hypnos", "Tyche", "Dionysos", "Hades"],
+  //   correctAnswer: "Dionysos",
+  // },
 
   {
     question: "What is the world's largest ocean?",
@@ -32,11 +32,11 @@ var questions = [
     correctAnswer: "January",
   },
 
-  {
-    question: "In what year did the Titanic sink?",
-    answers: [1908, 1912, 1916, 1920],
-    correctAnswer: 1912,
-  },
+  // {
+  //   question: "In what year did the Titanic sink?",
+  //   answers: [1908, 1912, 1916, 1920],
+  //   correctAnswer: 1912,
+  // },
 
   {
     question: "Who is the only US president to serve more than two terms?",
@@ -108,7 +108,7 @@ var game = {
     clearInterval(timer);
     game.correct++;
 
-    $("#subwrapper").html("<h2> YOU GOT IT </h2>");
+    $("#subwrapper").html("<h2> YOU GOT IT! </h2>");
 
     if (game.currentQuestion == questions.length - 1) {
 
@@ -122,7 +122,7 @@ var game = {
   answerIncorrectly: function () {
     clearInterval(timer);
     game.incorrect++;
-    $("#subwrapper").html("<h2> YOU GOT IT WRONG </h2>");
+    $("#subwrapper").html("<h2> YOU GOT IT WRONG! </h2>");
 
     $("#subwrapper").append("<h3> The correct answer was:" + questions[game.currentQuestion].correctAnswer + "</h3>");
     if (game.currentQuestion == questions.length - 1) {
@@ -133,7 +133,7 @@ var game = {
   },
   reset: function () {
     game.currentQuestion = 0;
-    game.counter = 0;
+    game.counter = 30;
     game.correct = 0;
     game.incorrect = 0;
     game.unanswered = 0;
